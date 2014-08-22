@@ -1,0 +1,27 @@
+package com.itscane.companies;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+import com.sun.istack.internal.logging.Logger;
+
+public class Main extends JavaPlugin {
+	
+	public final Logger log = Logger.getLogger("Minecraft", null);
+	
+	public void onEnable() {
+		PluginDescriptionFile pdFile = this.getDescription();
+	}
+	
+	public void onDisable() {
+		
+	}
+	
+	public void firstRun() {
+		
+	}
+	
+	public void save() {
+		
+	}
+
+}

@@ -1,0 +1,51 @@
+package com.itscane.companies;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import com.sun.istack.internal.logging.Logger;
+
+public class Main extends JavaPlugin {
+
+	public final Logger log = Logger.getLogger("Minecraft", null);
+	public File configFile;
+	public FileConfiguration config;
+
+	public void onEnable() {
+		configFile = new File(this.getDataFolder(), "config.yml");
+		config = YamlConfiguration.loadConfiguration(configFile);
+		firstRun();
+		save();
+		PluginDescriptionFile pdFile = this.getDescription();
+		log.info(pdFile.getName() + " v" + pdFile.getVersion()
+				+ " has been enabled!");
+	}
+
+	public void onDisable() {
+		save();
+		PluginDescriptionFile pdFile = this.getDescription();
+		log.info(pdFile.getName() + " v" + pdFile.getVersion()
+				+ " has been diabled!");
+	}
+
+	public void firstRun() {
+		if (!config.contains("Starting Money")) {
+			config.set("Starting Money", 150);
+		} else
+			return;
+	}
+
+	public void save() {
+		try {
+			config.save(configFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
